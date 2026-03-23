@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Luminal Logic | Configuration Engine</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-tertiary-container": "#fcf5ff",
+              "primary-container": "#00e3fd",
+              "secondary-fixed": "#c4dcfd",
+              "outline-variant": "#43484e",
+              "on-primary-fixed": "#003840",
+              "secondary-container": "#314863",
+              "on-tertiary": "#270069",
+              "tertiary-container": "#6d23f9",
+              "on-primary-fixed-variant": "#005762",
+              "primary-dim": "#00d4ec",
+              "on-surface": "#eaeef6",
+              "tertiary-fixed": "#bba2ff",
+              "surface": "#0a0f14",
+              "on-secondary": "#374e69",
+              "error-dim": "#d7383b",
+              "surface-container-high": "#1a2027",
+              "surface-container-low": "#0e1419",
+              "error-container": "#9f0519",
+              "surface-bright": "#252d35",
+              "error": "#ff716c",
+              "tertiary": "#a98bff",
+              "on-tertiary-fixed": "#1d0054",
+              "on-primary": "#005762",
+              "on-secondary-fixed": "#233b55",
+              "surface-container": "#141a20",
+              "inverse-on-surface": "#51555c",
+              "secondary": "#c4dcfd",
+              "on-surface-variant": "#a7abb2",
+              "on-primary-container": "#004d57",
+              "on-background": "#eaeef6",
+              "on-secondary-fixed-variant": "#405873",
+              "background": "#0a0f14",
+              "secondary-fixed-dim": "#b6ceee",
+              "primary-fixed-dim": "#00d4ec",
+              "inverse-primary": "#006976",
+              "primary-fixed": "#00e3fd",
+              "outline": "#71767c",
+              "inverse-surface": "#f7f9ff",
+              "tertiary-dim": "#834fff",
+              "on-error": "#490006",
+              "primary": "#81ecff",
+              "surface-dim": "#0a0f14",
+              "secondary-dim": "#b6ceee",
+              "surface-tint": "#81ecff",
+              "on-error-container": "#ffa8a3",
+              "on-tertiary-fixed-variant": "#4400aa",
+              "on-secondary-container": "#bad2f3",
+              "tertiary-fixed-dim": "#ae91ff",
+              "surface-variant": "#1f262e",
+              "surface-container-highest": "#1f262e",
+              "surface-container-lowest": "#000000"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+      body {
+        font-family: 'Inter', sans-serif;
+        background-color: #06090c;
+        color: #eaeef6;
+      }
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        height: 16px;
+        width: 16px;
+        border-radius: 50%;
+        background: #81ecff;
+        cursor: pointer;
+        box-shadow: 0 0 15px #81ecff, 0 0 5px rgba(255, 255, 255, 0.5);
+        border: 2px solid #0a0f14;
+      }
+      .glass-card {
+        background: rgba(20, 26, 32, 0.7);
+        backdrop-filter: blur(24px);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+      .glow-on-focus:focus-within {
+        box-shadow: 0 0 20px rgba(0, 227, 253, 0.15);
+        border-color: rgba(129, 236, 255, 0.4);
+      }
+      .rule-card-gradient {
+        background: linear-gradient(145deg, rgba(31, 38, 46, 0.8), rgba(20, 26, 32, 0.95));
+      }
+      .start-button-glow {
+        box-shadow: 0 0 40px rgba(0, 227, 253, 0.35);
+        background: linear-gradient(135deg, #00e3fd 0%, #006976 100%);
+      }
+      .start-button-glow:hover {
+        box-shadow: 0 0 60px rgba(0, 227, 253, 0.5);
+      }
+    </style>
+</head>
+<body class="flex min-h-screen text-on-surface">
+<!-- SideNavBar (Shared Component) -->
+<aside class="flex flex-col h-screen w-64 border-r border-outline-variant/5 bg-[#0a0f14] dark:bg-[#0a0f14] font-['Manrope'] text-sm tracking-wide py-8 px-4 sticky top-0">
+<div class="mb-12 px-4">
+<h1 class="text-xl font-bold tracking-tighter text-[#81ecff]">Luminal</h1>
+<p class="text-[10px] text-slate-500 tracking-widest uppercase">Synthetic Engine</p>
+</div>
+<nav class="flex-1 space-y-2">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-white transition-colors hover:bg-[#1f262e] transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-white transition-colors hover:bg-[#1f262e] transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="cloud_upload">cloud_upload</span>
+<span>Upload</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#81ecff] font-semibold border-r-2 border-[#81ecff] bg-gradient-to-r from-[#81ecff]/10 to-transparent transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="settings_input_component">settings_input_component</span>
+<span>Config</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-white transition-colors hover:bg-[#1f262e] transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="collections">collections</span>
+<span>Gallery</span>
+</a>
+</nav>
+<div class="mt-auto px-4 flex items-center gap-3 pt-6 border-t border-outline-variant/10">
+<div class="h-8 w-8 rounded-full bg-surface-container-highest flex items-center justify-center">
+<img alt="User Profile" class="rounded-full" data-alt="Minimalist geometric user profile avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNRyY0J-81MNwbGd7sLOwsJZLEFKSOktRTHi0PmFhPxVPlWRgNwyKorSmnAubH6MpZi7k1atrBngDmfW9ZEczTf5ERftyZXKLBcZfBweRv1iXPqsceb6GdxssQb0BkcwLm5auET0PSbjchWPRn6le4nk-lPazW6Du09g2Gqxq2csBdu0xFtls6TjpB3UV7SB1WE_-4OSqfnR5XYvHedHDtqS_VWrjirZ4TyPbol6MMov5J5HdS86Q52eDb9KBzukGN02LTo_2fSsU"/>
+</div>
+<div>
+<p class="text-xs font-semibold text-on-surface">Alex Chen</p>
+<p class="text-[10px] text-on-surface-variant">Arch-Engineer</p>
+</div>
+</div>
+</aside>
+<main class="flex-1 flex flex-col bg-background overflow-y-auto">
+<!-- TopNavBar (Shared Component) -->
+<header class="flex items-center justify-between w-full px-8 h-16 sticky top-0 z-50 bg-[#06090c]/80 backdrop-blur-md font-['Manrope'] font-medium">
+<div class="flex items-center gap-4 flex-1">
+<span class="text-lg font-black tracking-widest uppercase text-white">Luminal Logic</span>
+<div class="max-w-md w-full ml-8">
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-sm">search</span>
+<input class="w-full bg-surface-container-high/40 border border-outline-variant/5 rounded-full py-2 pl-10 pr-4 text-sm focus:ring-1 focus:ring-[#81ecff]/50 focus:bg-surface-container-high transition-all outline-none" placeholder="Search parameters..." type="text"/>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<button class="text-slate-400 hover:text-[#81ecff] transition-colors"><span class="material-symbols-outlined">dark_mode</span></button>
+<button class="text-slate-400 hover:text-[#81ecff] transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-0.5 right-0.5 h-1.5 w-1.5 bg-primary rounded-full"></span>
+</button>
+</div>
+</header>
+<!-- Main Content Area -->
+<div class="p-12 max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12">
+<!-- Left Column: Parameters & Rules -->
+<div class="lg:col-span-8 space-y-16">
+<!-- Section Header -->
+<header>
+<div class="inline-block px-3 py-1 bg-primary/10 border border-primary/20 rounded-full mb-4">
+<span class="text-[10px] font-extrabold tracking-[0.1em] text-primary uppercase">Engine configuration v4.2</span>
+</div>
+<h2 class="font-headline text-5xl font-extrabold tracking-tight text-on-surface mb-3">Generation Config</h2>
+<p class="font-body text-on-surface-variant text-lg leading-relaxed max-w-2xl">Refine the neural lattice parameters and establish deterministic structural integrity for your synthetic datasets.</p>
+</header>
+<!-- Global Parameters -->
+<section>
+<div class="flex items-center gap-4 mb-8">
+<span class="text-[11px] font-bold tracking-[0.3em] text-primary/70 uppercase">01 // Global Core</span>
+<div class="h-[1px] flex-1 bg-gradient-to-r from-outline-variant/30 to-transparent"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Target Rows -->
+<div class="space-y-3">
+<label class="block font-label text-[10px] font-bold text-on-surface-variant uppercase tracking-widest ml-1">Target Row Count</label>
+<div class="bg-surface-container-high/40 p-5 rounded-2xl border border-outline-variant/10 glow-on-focus transition-all">
+<input class="w-full bg-transparent border-none text-3xl font-headline font-extrabold text-primary focus:ring-0 p-0" type="number" value="150000"/>
+<div class="flex items-center justify-between mt-3">
+<p class="text-[10px] text-on-surface-variant/60 font-medium">CAPACITY: 10.0M ROWS</p>
+<span class="material-symbols-outlined text-xs text-on-surface-variant/40">sensors</span>
+</div>
+</div>
+</div>
+<!-- Noise Level -->
+<div class="space-y-3">
+<label class="block font-label text-[10px] font-bold text-on-surface-variant uppercase tracking-widest ml-1">Entropy / Noise Level</label>
+<div class="bg-surface-container-high/40 p-5 rounded-2xl border border-outline-variant/10 glow-on-focus transition-all flex flex-col justify-between h-[106px]">
+<div class="flex justify-between items-baseline mb-3">
+<span class="text-2xl font-headline font-extrabold text-on-surface">12.5<span class="text-sm text-on-surface-variant ml-1">%</span></span>
+<span class="text-[10px] text-primary font-bold uppercase tracking-tighter bg-primary/10 px-2 py-0.5 rounded">Stable</span>
+</div>
+<div class="relative flex items-center h-4">
+<div class="absolute w-full h-1 bg-surface-container rounded-full"></div>
+<input class="relative w-full h-1 bg-transparent appearance-none cursor-pointer z-10" type="range" value="12.5"/>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Column-Specific Rules -->
+<section>
+<div class="flex items-center justify-between mb-8">
+<div class="flex items-center gap-4 flex-1">
+<span class="text-[11px] font-bold tracking-[0.3em] text-primary/70 uppercase">02 // Structural Rules</span>
+<div class="h-[1px] flex-1 bg-gradient-to-r from-outline-variant/30 to-transparent mr-6"></div>
+</div>
+<button class="flex items-center gap-2 px-5 py-2 bg-surface-container-highest/80 text-[11px] font-black text-on-surface hover:bg-primary hover:text-on-primary-fixed transition-all rounded-full border border-outline-variant/20 uppercase tracking-widest shadow-lg">
+<span class="material-symbols-outlined text-sm">add</span> Add Rule
+                    </button>
+</div>
+<div class="space-y-4">
+<!-- Rule Card 1 -->
+<div class="rule-card-gradient p-1 rounded-2xl group transition-all duration-500 hover:scale-[1.01]">
+<div class="bg-surface-container-low/90 p-6 rounded-[14px] border border-white/5 flex items-center justify-between">
+<div class="flex items-center gap-6">
+<div class="h-12 w-12 bg-primary/5 rounded-xl border border-primary/20 flex items-center justify-center transition-transform group-hover:rotate-6">
+<span class="material-symbols-outlined text-primary text-2xl" data-icon="fingerprint">fingerprint</span>
+</div>
+<div>
+<div class="flex items-center gap-2 mb-1">
+<p class="font-headline font-bold text-on-surface text-lg">transaction_id</p>
+<span class="text-[9px] font-black bg-outline-variant/20 text-on-surface-variant px-1.5 py-0.5 rounded uppercase">UUID</span>
+</div>
+<p class="font-body text-xs text-on-surface-variant tracking-wide">Type: UUID-v4 • Unique Constraint: 100% • Entropy: 0.0</p>
+</div>
+</div>
+<div class="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-all translate-x-4 group-hover:translate-x-0">
+<button class="h-9 w-9 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-white hover:bg-surface-container-highest transition-all"><span class="material-symbols-outlined text-lg">edit</span></button>
+<button class="h-9 w-9 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-error hover:bg-error/10 transition-all"><span class="material-symbols-outlined text-lg">delete</span></button>
+</div>
+</div>
+</div>
+<!-- Rule Card 2 -->
+<div class="rule-card-gradient p-1 rounded-2xl group transition-all duration-500 hover:scale-[1.01]">
+<div class="bg-surface-container-low/90 p-6 rounded-[14px] border border-white/5 flex items-center justify-between">
+<div class="flex items-center gap-6">
+<div class="h-12 w-12 bg-tertiary/5 rounded-xl border border-tertiary/20 flex items-center justify-center transition-transform group-hover:-rotate-6">
+<span class="material-symbols-outlined text-tertiary text-2xl" data-icon="calendar_month">calendar_month</span>
+</div>
+<div>
+<div class="flex items-center gap-2 mb-1">
+<p class="font-headline font-bold text-on-surface text-lg">user_age</p>
+<span class="text-[9px] font-black bg-outline-variant/20 text-on-surface-variant px-1.5 py-0.5 rounded uppercase">Integer</span>
+</div>
+<p class="font-body text-xs text-on-surface-variant tracking-wide">Range: 18 - 95 • Distribution: Gaussian (Normal)</p>
+</div>
+</div>
+<div class="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-all translate-x-4 group-hover:translate-x-0">
+<button class="h-9 w-9 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-white hover:bg-surface-container-highest transition-all"><span class="material-symbols-outlined text-lg">edit</span></button>
+<button class="h-9 w-9 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-error hover:bg-error/10 transition-all"><span class="material-symbols-outlined text-lg">delete</span></button>
+</div>
+</div>
+</div>
+<!-- Rule Card 3 -->
+<div class="rule-card-gradient p-1 rounded-2xl group transition-all duration-500 hover:scale-[1.01]">
+<div class="bg-surface-container-low/90 p-6 rounded-[14px] border border-white/5 flex items-center justify-between">
+<div class="flex items-center gap-6">
+<div class="h-12 w-12 bg-secondary/5 rounded-xl border border-secondary/20 flex items-center justify-center transition-transform group-hover:scale-110">
+<span class="material-symbols-outlined text-secondary text-2xl" data-icon="payments">payments</span>
+</div>
+<div>
+<div class="flex items-center gap-2 mb-1">
+<p class="font-headline font-bold text-on-surface text-lg">purchase_amount</p>
+<span class="text-[9px] font-black bg-outline-variant/20 text-on-surface-variant px-1.5 py-0.5 rounded uppercase">Currency</span>
+</div>
+<p class="font-body text-xs text-on-surface-variant tracking-wide">Currency: USD • Outlier Prob: 2.5% • Floor: 0.99</p>
+</div>
+</div>
+<div class="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-all translate-x-4 group-hover:translate-x-0">
+<button class="h-9 w-9 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-white hover:bg-surface-container-highest transition-all"><span class="material-symbols-outlined text-lg">edit</span></button>
+<button class="h-9 w-9 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-error hover:bg-error/10 transition-all"><span class="material-symbols-outlined text-lg">delete</span></button>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Generation Summary Sticky -->
+<div class="lg:col-span-4">
+<div class="sticky top-24 space-y-6">
+<!-- Sleek Control Center Panel -->
+<div class="glass-card p-8 rounded-[32px] shadow-2xl overflow-hidden relative">
+<!-- Tech background accent -->
+<div class="absolute -top-24 -right-24 h-48 w-48 bg-primary/5 rounded-full blur-3xl"></div>
+<div class="flex items-center justify-between mb-8">
+<h3 class="font-headline text-sm font-black text-on-surface uppercase tracking-[0.2em]">Summary</h3>
+<div class="h-1.5 w-1.5 rounded-full bg-primary animate-pulse shadow-[0_0_8px_#81ecff]"></div>
+</div>
+<div class="space-y-5 mb-10">
+<div class="group">
+<div class="flex justify-between items-center mb-1">
+<span class="text-[10px] text-on-surface-variant font-bold uppercase tracking-widest opacity-60">File Weight</span>
+<span class="font-headline font-extrabold text-on-surface group-hover:text-primary transition-colors">2.44 GB</span>
+</div>
+<div class="h-0.5 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary/40 w-1/3"></div>
+</div>
+</div>
+<div class="group">
+<div class="flex justify-between items-center mb-1">
+<span class="text-[10px] text-on-surface-variant font-bold uppercase tracking-widest opacity-60">Compute Load</span>
+<span class="flex items-center gap-1.5 text-primary">
+<span class="material-symbols-outlined text-sm font-bold">bolt</span>
+<span class="font-headline font-extrabold">MEDIUM</span>
+</span>
+</div>
+<div class="h-0.5 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary/40 w-1/2"></div>
+</div>
+</div>
+<div class="group">
+<div class="flex justify-between items-center mb-1">
+<span class="text-[10px] text-on-surface-variant font-bold uppercase tracking-widest opacity-60">Accuracy</span>
+<span class="font-headline font-extrabold text-[#00e3fd]">98.2%</span>
+</div>
+<div class="h-0.5 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-[#00e3fd]/40 w-[98%]"></div>
+</div>
+</div>
+</div>
+<!-- Visualization Card -->
+<div class="relative overflow-hidden rounded-2xl bg-black/40 border border-white/5 mb-10 aspect-[16/10] group cursor-crosshair">
+<img alt="Synthetic data visualization preview" class="w-full h-full object-cover opacity-20 group-hover:opacity-40 transition-opacity duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNQxTFuCNKeGXIQWeQx1kj0KKeK4FD988qdutT95CVTq5KforuAWMCAOWOd70jmqULuIYOZctXc8_PfyaBlJehJO09s2yKAI3CLfqTm_sIwVaQM4gNQpMDqIJH5kBEfZVFHu4-6CgpJFjA1440GOmG9hoYOlpxIQ0bpZB5PKh0Fq8zUnKywdpSInn6hJTn0bA60Q-XUQA-khJLCktcF7tG39INnpOg7AwD8dLBVoZLHWDgIjG-sPiioAOlajrIJX8tVa88jZ2CDT8"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low via-transparent to-transparent"></div>
+<div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="px-3 py-1 bg-white/10 backdrop-blur-md rounded-full text-[10px] font-bold uppercase tracking-widest text-white border border-white/20">Full Preview</span>
+</div>
+<div class="absolute bottom-4 left-4 right-4 flex justify-between items-end">
+<p class="text-[9px] font-black text-primary/80 uppercase tracking-widest">Blueprint Alpha</p>
+<div class="flex gap-1">
+<div class="h-1 w-1 rounded-full bg-primary/50"></div>
+<div class="h-1 w-1 rounded-full bg-primary/50"></div>
+<div class="h-1 w-1 rounded-full bg-primary"></div>
+</div>
+</div>
+</div>
+<!-- Start Button: Focal Point -->
+<button class="start-button-glow w-full py-5 text-on-primary-fixed font-headline font-black uppercase tracking-[0.25em] text-xs rounded-2xl transition-all hover:scale-[1.03] active:scale-95 flex items-center justify-center gap-3">
+<span class="material-symbols-outlined" data-weight="fill">play_arrow</span>
+                        Initialize Engine
+                    </button>
+<p class="text-[9px] text-center text-on-surface-variant font-bold uppercase tracking-widest mt-8 opacity-40">Cluster: B-12 // Latency: 14ms</p>
+</div>
+<!-- Secondary Insights -->
+<div class="bg-surface-container-low/50 backdrop-blur-sm p-6 rounded-3xl border border-outline-variant/10 shadow-lg">
+<div class="flex items-center gap-3 mb-5">
+<div class="h-8 w-8 bg-tertiary/10 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-sm text-tertiary">monitor_heart</span>
+</div>
+<h4 class="text-[10px] font-black text-on-surface uppercase tracking-[0.2em]">Engine Vitals</h4>
+</div>
+<div class="space-y-4">
+<div class="space-y-2">
+<div class="flex justify-between text-[9px] font-bold text-on-surface-variant/70 uppercase">
+<span>Global Core Load</span>
+<span>65%</span>
+</div>
+<div class="h-1.5 w-full bg-surface-container rounded-full overflow-hidden p-[2px]">
+<div class="h-full bg-gradient-to-r from-primary to-primary-container w-[65%] rounded-full"></div>
+</div>
+</div>
+<div class="flex items-center gap-2 pt-2">
+<span class="h-1.5 w-1.5 rounded-full bg-green-500 shadow-[0_0_8px_#22c55e]"></span>
+<span class="text-[9px] font-bold text-on-surface-variant/80 uppercase tracking-widest">Neural Link: Active</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>
